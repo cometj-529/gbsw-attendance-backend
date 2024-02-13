@@ -1,11 +1,13 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Get,
   Post,
   Req,
   Res,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UserSaveDTO } from './dto/user.save.dto';
@@ -21,7 +23,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('/register')
-  async register(@Req() req: Request, @Body() dto: UserSaveDTO): Promise<any> {
+  async register(@Req() req: Request, @Body() dto: UserSaveDTO) {
     return await this.authService.saveUser(dto);
   }
 
@@ -34,6 +36,7 @@ export class AuthController {
 
   @Get('/authenticate')
   @UseGuards(AuthGuard)
+  @UseInterceptors(ClassSerializerInterceptor)
   isAuthenticated(@Req() req: Request): any {
     const user: any = req.user;
     return user;
@@ -42,6 +45,7 @@ export class AuthController {
   @Get('/admin')
   @UseGuards(AuthGuard, RolesGuard)
   @Roles(RoleType.ADMIN)
+  @UseInterceptors(ClassSerializerInterceptor)
   adminRoleCheck(@Req() req: Request): any {
     const user: any = req.user;
     return user;

@@ -1,3 +1,4 @@
+import { RoleService } from './role.service';
 import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
@@ -25,7 +26,7 @@ import { Role } from './entity/role.entity';
     PassportModule,
   ],
   controllers: [AuthController],
-  providers: [AuthService, UserSerivce, JwtStrategy],
+  providers: [AuthService, UserSerivce, RoleService, JwtStrategy],
   exports: [TypeOrmModule],
 })
 export class AuthModule {}

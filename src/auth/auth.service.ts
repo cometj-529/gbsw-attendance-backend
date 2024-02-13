@@ -19,7 +19,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async saveUser(dto: UserSaveDTO): Promise<UserSaveDTO> {
+  async saveUser(dto: UserSaveDTO) {
     const user: User = await this.userService.findByOption({
       where: { userid: dto.userid },
     });
@@ -31,7 +31,7 @@ export class AuthService {
       );
     }
 
-    return await this.userService.save(dto);
+    await this.userService.save(dto);
   }
 
   async validataUser(
