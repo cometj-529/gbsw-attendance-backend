@@ -41,9 +41,13 @@ export class AuthService {
       where: { userid: dto.userid },
     });
 
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
     const validatePassword = await bcrypt.compare(dto.password, user.password);
 
-    if (!user || !validatePassword) {
+    if (!validatePassword) {
       throw new UnauthorizedException();
     }
 

@@ -27,3 +27,10 @@ export class User {
   @JoinTable()
   roles: Role[];
 }
+
+export const defaultUser: Partial<User> = {
+  id: 1,
+  userid: 'admin',
+  username: '관리자',
+  password: '1234',
+};

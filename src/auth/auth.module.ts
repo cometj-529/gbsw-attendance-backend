@@ -29,4 +29,12 @@ import { Role } from './entity/role.entity';
   providers: [AuthService, UserSerivce, RoleService, JwtStrategy],
   exports: [TypeOrmModule],
 })
-export class AuthModule {}
+export class AuthModule {
+  constructor(
+    private roleService: RoleService,
+    private userService: UserSerivce,
+  ) {
+    this.roleService.createDefaultRole();
+    this.userService.createDefaultRole();
+  }
+}

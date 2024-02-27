@@ -8,3 +8,8 @@ export class Role {
   @Column()
   name: string;
 }
+
+export const defaultRole: Partial<Role> = {
+  id: 1,
+  name: 'ADMIN',
+};
