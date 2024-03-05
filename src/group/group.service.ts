@@ -37,6 +37,10 @@ export class GroupService {
   async getGroupByUser(req: Request): Promise<Group[] | undefined> {
     const user = req.user as User;
 
+    if (user.roles.some((role) => String(role) === String(RoleType.ADMIN))) {
+      return await this.getAll();
+    }
+
     return await this.repository
       .createQueryBuilder('group')
       .leftJoin('group.users', 'user')

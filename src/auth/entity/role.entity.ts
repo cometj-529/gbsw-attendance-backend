@@ -9,7 +9,13 @@ export class Role {
   name: string;
 }
 
-export const defaultRole: Partial<Role> = {
-  id: 1,
-  name: 'ADMIN',
-};
+export const defaultRole: Partial<Role>[] = [
+  {
+    id: 1,
+    name: 'ADMIN',
+  },
+  {
+    id: 2,
+    name: 'USER',
+  },
+];
